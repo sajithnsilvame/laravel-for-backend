@@ -15,13 +15,21 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureUserHasRole::class,
         ]);
+
+        $middleware->redirectGuestsTo(function (\Illuminate\Http\Request $request): ?string {
+            if ($request->is('api/*')) {
+                return null;
+            }
+
+            return route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, \Illuminate\Http\Request $request) {
+        $exceptions->shouldRenderJsonWhen(function (\Illuminate\Http\Request $request, \Throwable $e) {
             if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Unauthenticated.'
-                ], 401);
+                return true;
             }
+
+            return $request->expectsJson();
         });
     })->create();
