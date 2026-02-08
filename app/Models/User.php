@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile_number',
+        'profile_picture',
         'role_id',
     ];
 
@@ -56,6 +58,6 @@ class User extends Authenticatable
 
     public function hasRole(RoleEnum $role): bool
     {
-        return $this->role->slug === $role->value;
+        return $this->role?->slug === $role->value;
     }
 }
