@@ -5,13 +5,13 @@ namespace App\Services;
 use App\Enums\RoleEnum;
 use App\Models\Role;
 use App\Models\User;
-use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-    public function __construct(public UserRepositoryInterface $userRepository) {}
+    public function __construct(public UserRepository $userRepository) {}
 
     /**
      * @param  array<string, mixed>  $data
@@ -60,6 +60,6 @@ class AuthService
 
     public function logout(User $user): void
     {
-        $user->currentAccessToken()->delete();
+        $user->currentAccessToken()?->delete();
     }
 }

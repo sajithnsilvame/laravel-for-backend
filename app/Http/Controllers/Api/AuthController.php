@@ -127,7 +127,7 @@ class AuthController extends Controller
     }
 
     #[OA\Get(
-        path: '/user',
+        path: '/auth-user',
         summary: 'Get authenticated user',
         description: 'Returns the currently authenticated user with their role',
         tags: ['Authentication'],

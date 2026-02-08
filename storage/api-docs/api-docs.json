@@ -185,14 +185,14 @@
                 ]
             }
         },
-        "/user": {
+        "/auth-user": {
             "get": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Get authenticated user",
                 "description": "Returns the currently authenticated user with their role",
-                "operationId": "f5ec16b00773d0d3c02a330ed2586727",
+                "operationId": "a58e8b267b65d24d145fe138c0519505",
                 "responses": {
                     "200": {
                         "description": "Authenticated user data",
